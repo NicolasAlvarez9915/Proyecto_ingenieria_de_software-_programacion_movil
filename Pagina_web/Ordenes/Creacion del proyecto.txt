@@ -12,6 +12,7 @@ npm install
 ng update @angular/core@9 @angular/cli@9
 ng add @angular/localize
 ng update @angular/cli@^10 @angular/core@^10 --force
+ng update @angular/cli @angular/core --force
 
 Hasta ahora no se ha arreglado el error de la actualizacion a angular 11.
 
