@@ -1,10 +1,12 @@
 package com.naacdeveloper.leco
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -16,9 +18,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.naacdeveloper.leco.ui.home.HomeFragment
+import okhttp3.Call
+import okhttp3.OkHttpClient
 import org.w3c.dom.Text
+import java.io.IOException
+import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HomeFragment.ComprobarRed {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -54,4 +61,38 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    override fun HayRed(): Boolean {
+        super.HayRed()
+        return Network.hayRed(this);
+    }
+
+
+    //Metodo get OkHttp3
+
+    override fun solicitud(url: String) {
+        val cliente = OkHttpClient();
+        val solicitud = okhttp3.Request.Builder().url(url).build();
+        cliente.newCall(solicitud).enqueue(object: okhttp3.Callback{
+            override fun onFailure(call: Call?, e: IOException?) {
+                //implementar error
+            }
+
+            override fun onResponse(call: Call?, response: okhttp3.Response) {
+                val result = response.body().string();
+
+               this@MainActivity.runOnUiThread {
+                   try{
+                       Toast.makeText(this@MainActivity, result, Toast.LENGTH_LONG).show();
+                       Log.d("SolicitudVolley",result);
+                   }catch (e: Exception){
+
+                   }
+               }
+
+            }
+        });
+    }
+
+
 }
