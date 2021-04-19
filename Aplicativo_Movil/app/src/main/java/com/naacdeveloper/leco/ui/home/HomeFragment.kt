@@ -49,7 +49,7 @@ class HomeFragment : Fragment(), CompletadoListener {
         btnSolicitudHttp?.setOnClickListener {
             if(listener?.HayRed() == true){
 
-                PeticionesHtml(this).execute("https://distribuidoraesb.azurewebsites.net/api/Producto");
+                PeticionesHtml(this).execute("http://192.168.100.214:8081/weatherforecast");
             }else{
                 Toast.makeText(root?.context, "No hay red", Toast.LENGTH_LONG).show();
             }
@@ -58,7 +58,7 @@ class HomeFragment : Fragment(), CompletadoListener {
         btnSolicitudVolley = root?.findViewById(R.id.btnVolley);
         btnSolicitudVolley?.setOnClickListener {
             if(listener?.HayRed() == true){
-                solicitudHttpVolley("https://distribuidoraesb.azurewebsites.net/api/Producto");
+                solicitudHttpVolley("http://192.168.100.214:8081/weatherforecast");
             }else{
                 Toast.makeText(root?.context, "No hay red", Toast.LENGTH_LONG).show();
             }
@@ -67,7 +67,7 @@ class HomeFragment : Fragment(), CompletadoListener {
         btnSolicutudOkHttp = root?.findViewById(R.id.btnSolicitudOkHttp);
         btnSolicutudOkHttp?.setOnClickListener {
             if(listener?.HayRed() == true){
-                listener?.solicitud("https://distribuidoraesb.azurewebsites.net/api/Producto");
+                listener?.solicitud("http://192.168.100.214:8081/weatherforecast");
             }else{
                 Toast.makeText(root?.context, "No hay red", Toast.LENGTH_LONG).show();
             }
@@ -99,13 +99,13 @@ class HomeFragment : Fragment(), CompletadoListener {
                     Toast.makeText(root?.context, productosJson, Toast.LENGTH_LONG).show();
                     Log.d("SolicitudVolley", response);
 
-                    val gson = Gson();
+                    /*val gson = Gson();
                     val res = gson.fromJson(productosJson, Productos::class.java);
                     Toast.makeText(
                         root?.context,
                         res.productos?.count().toString(),
                         Toast.LENGTH_LONG
-                    ).show();
+                    ).show();*/
                 } catch (e: Exception) {
 
                 }
@@ -118,17 +118,15 @@ class HomeFragment : Fragment(), CompletadoListener {
     //Metodo Post volley
 
     private fun solicitudPostVolley(){
-        val url = "https://distribuidoraesb.azurewebsites.net/api/Usuario";
+        val url = "https://distribuidoraesb.azurewebsites.net/api/Usuario/InicioSesion";
         val cola = Volley.newRequestQueue(root?.context);
 
         var dialog = ProgressDialog.show(root?.context, "", "Espere un momento...", true);
 
 
         val jsonBody = JSONObject()
-        jsonBody.put("correo", "144")
-        jsonBody.put("idpersona", "1")
-        jsonBody.put("contraseña", "1")
-        jsonBody.put("rol", "1")
+        jsonBody.put("correo", "admin@admin.com")
+        jsonBody.put("contraseña", "123")
 
         val requestBody = jsonBody.toString()
 
