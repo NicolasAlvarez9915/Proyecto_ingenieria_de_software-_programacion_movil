@@ -58,7 +58,7 @@ class HomeFragment : Fragment(), CompletadoListener {
         btnSolicitudVolley = root?.findViewById(R.id.btnVolley);
         btnSolicitudVolley?.setOnClickListener {
             if(listener?.HayRed() == true){
-                solicitudHttpVolley("http://192.168.100.214:8081/weatherforecast");
+                solicitudHttpVolley("http://192.168.100.214:8087/api/ImagenProducto/123");
             }else{
                 Toast.makeText(root?.context, "No hay red", Toast.LENGTH_LONG).show();
             }
@@ -96,7 +96,7 @@ class HomeFragment : Fragment(), CompletadoListener {
                 try {
                     var productosJson = "{ \"productos\":$response}"
 
-                    Toast.makeText(root?.context, productosJson, Toast.LENGTH_LONG).show();
+                    Toast.makeText(root?.context, response, Toast.LENGTH_LONG).show();
                     Log.d("SolicitudVolley", response);
 
                     /*val gson = Gson();

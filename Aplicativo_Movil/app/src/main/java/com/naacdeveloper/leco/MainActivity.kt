@@ -1,5 +1,7 @@
 package com.naacdeveloper.leco
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -18,12 +20,16 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 import com.naacdeveloper.leco.ui.home.HomeFragment
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import org.w3c.dom.Text
 import java.io.IOException
 import java.lang.Exception
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity(), HomeFragment.ComprobarRed {
 
@@ -40,6 +46,10 @@ class MainActivity : AppCompatActivity(), HomeFragment.ComprobarRed {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+
+
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)

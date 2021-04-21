@@ -37,9 +37,9 @@ https://www.nuget.org/packages/System.Collections/
 
 Entity.csproj
 
-netstandard2.1
 
-dotnet add package System.ComponentModel.Annotations --version 4.7.0
+
+dotnet add package System.ComponentModel.Annotations --version 5.0.0
 
 dotnet restore
 
@@ -62,9 +62,9 @@ https://www.nuget.org/packages/System.ComponentModel.Annotations/
 
 netstandard2.1
 
-dotnet add package Microsoft.EntityFrameworkCore --version 3.1.9
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.5
 
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.1.9
+dotnet add package Microsoft.EntityFrameworkCore --version 5.0.5
 
 dotnet add package System.Collections --version 4.3.0 
 
@@ -72,9 +72,9 @@ dotnet restore
 
 Verificar versiones en los siguientes links:
 
-https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/3.1.9
+https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer
 
-https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.9
+https://www.nuget.org/packages/Microsoft.EntityFrameworkCore
 
 https://www.nuget.org/packages/System.Collections/
 
@@ -106,10 +106,10 @@ Clase service
 
 public class "Nombre de la clase de Entity"Service
 {
-    private readonly "Nombre de la clase Context en Datos"Context _context;
+    private readonly "Nombre de la clase Context en Datos"Context context;
     public "Nombre de la clase de Entity"Service("Nombre de la clase Context en Datos"Context context)
     {
-        _context=context;
+        this.context=context;
     }
 }
 
@@ -132,7 +132,7 @@ Siempre utilizar el .SaveChanges(); para que se completen los cambios en la base
 
 4- Parte del back-End en presentacion
 
-dotnet add package Microsoft.EntityFrameworkCore.Tools --version 3.1.9
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 5.0.5
 
 startup.cs
 
@@ -162,7 +162,7 @@ public class "Nombre del controller"Controller : ControllerBase
 
 Verificar version en:
 
-https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/3.1.9
+https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools
 
 5-Migraciones
 
@@ -172,7 +172,7 @@ dotnet tool install --global dotnet-ef
 
 dotnet tool update --global dotnet-ef
 
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.9
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.5
 
 dotnet ef migrations add InitialCreate -s "Ruta de la capa de presentacion"
 
@@ -180,5 +180,5 @@ dotnet ef database update -s "Ruta de la capa presentacion"
 
 Verificar version en:
 
-https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/3.1.9
+https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design
 
