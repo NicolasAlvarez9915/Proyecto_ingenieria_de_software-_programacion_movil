@@ -14,16 +14,16 @@ namespace Logica
             this.context = context;
         }
 
-        public Response GuardarInmueble(Inmueble inmueble){
+        public Response<Inmueble> GuardarInmueble(Inmueble inmueble){
             try
             {
                 context.Inmuebles.Add(inmueble);
                 context.SaveChanges();
-                return new Response(inmueble);
+                return new Response<Inmueble>(inmueble);
             }
             catch (Exception e)
             {
-                return new Response($"Error de la aplicacion: {e.Message}");
+                return new Response<Inmueble>($"Error de la aplicacion: {e.Message}");
             }
         }
 
@@ -35,21 +35,26 @@ namespace Logica
             return context.FotoInmuebles.ToList();
         }
 
-        public Response GuardarFotoInmueble(fotoInmueble foto){
+        public Response<fotoInmueble> GuardarFotoInmueble(fotoInmueble foto){
             try
             {
                 context.FotoInmuebles.Add(foto);
                 context.SaveChanges();
-                return new Response(foto);
+                return new Response<fotoInmueble>(foto);
             }
             catch (Exception e)
             {
-                return new Response($"Error de la aplicacion: {e.Message}");
+                return new Response<fotoInmueble>($"Error de la aplicacion: {e.Message}");
             }
         }
-        public object GuardarFotoInmueble(Inmueble inmueble)
+
+        public Response<fotoInmueble> Foto(string codigo)
         {
-            throw new NotImplementedException();
+            fotoInmueble foto = context.FotoInmuebles.Find(codigo);
+            if(foto == null){
+                return new Response<fotoInmueble>("No existe");
+            }
+            return new Response<fotoInmueble>(foto);
         }
     }
 }

@@ -1,0 +1,17 @@
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Logica.deps.json
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Logica.dll
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\ref\Logica.dll
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Logica.pdb
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Datos.dll
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Entity.dll
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Entity.pdb
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\bin\Release\net5.0\Datos.pdb
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.csprojAssemblyReference.cache
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.GeneratedMSBuildEditorConfig.editorconfig
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.AssemblyInfoInputs.cache
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.AssemblyInfo.cs
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.csproj.CoreCompileInputs.cache
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.csproj.CopyComplete
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.dll
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\ref\Logica.dll
+E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Release\net5.0\Logica.pdb

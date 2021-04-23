@@ -2,13 +2,13 @@ using System;
 
 namespace Entity
 {
-    public class Response
+    public class Response<T>
     {
-        public Object Object { get; set; }
+        public T Object { get; set; }
         public bool Error { get; set; } 
         public String Mensaje { get; set; }
 
-        public Response(Object Object)
+        public Response(T Object)
         {
             Error = false;
             this.Object = Object;

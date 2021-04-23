@@ -34,7 +34,7 @@ namespace leco.Controllers
             return inmuebles;
         }
 
-        [HttpPost("Foto")]
+        [HttpPost("/Foto")]
         public ActionResult<fotoInmuebleView> PostFotoInmueble(fotoInmuebleInput Input)
         {
             fotoInmueble foto = MapearFotoInmueble(Input);
@@ -47,6 +47,16 @@ namespace leco.Controllers
         {
             var fotos = Service.Fotos().Select(p => new fotoInmuebleView(p));
             return fotos;
+        }
+
+        [HttpGet("Fotos/{codigo}")]
+        public ActionResult<fotoInmuebleView> GetFoto(String codigo)
+        {
+            var response = Service.Foto(codigo);
+            if (response.Error){
+                return BadRequest(response.Mensaje);
+            }
+            return new fotoInmuebleView(response.Object);
         }
 
         private fotoInmueble MapearFotoInmueble(fotoInmuebleInput input)

@@ -182,3 +182,6 @@ Verificar version en:
 
 https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design
 
+
+
+dotnet publish -c Release -o ./publish
