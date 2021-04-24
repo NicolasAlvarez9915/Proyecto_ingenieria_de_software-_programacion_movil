@@ -20,6 +20,8 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.naacdeveloper.leco.FotoInmueble
+import com.naacdeveloper.leco.InmuebleCurd
 import com.naacdeveloper.leco.R
 import java.io.ByteArrayOutputStream
 
@@ -31,7 +33,9 @@ class GalleryFragment : Fragment() {
     var imgLocal: ImageView? = null;
     var tvimgbas64: TextView? = null;
     var imgNube: ImageView? = null;
-    
+    var btnRecueprarImagen: Button? =null;
+    var inmuebleCurd: InmuebleCurd? = null;
+    var btnSubirimagen: Button? = null;
 
     var imgB64: String? = null;
 
@@ -47,9 +51,26 @@ class GalleryFragment : Fragment() {
         tvimgbas64 = root?.findViewById(R.id.tvimgbas64);
         imgNube = root?.findViewById(R.id.imgNube);
 
+        inmuebleCurd = InmuebleCurd();
+
         btnGaleria = root?.findViewById(R.id.btnGaleria);
         btnGaleria?.setOnClickListener {
             checkPermissions();
+        }
+
+        btnRecueprarImagen = root?.findViewById(R.id.btnRecueprarImagen);
+        btnRecueprarImagen?.setOnClickListener {
+            inmuebleCurd?.obtenerFotoInmueble("http://192.168.100.214:8081/api/Inmueble/Fotos/prueba3",root?.context!!);
+            if(inmuebleCurd?.fotoInmueble != null){
+                imgB64 = inmuebleCurd?.fotoInmueble?.imagen;
+                parsearBase64Imagen();
+            }
+        }
+
+        btnSubirimagen = root?.findViewById(R.id.btnSubirimagen);
+        btnSubirimagen?.setOnClickListener {
+            var foto = FotoInmueble("prueba3", "string", imgB64!!);
+            inmuebleCurd?.subirFoto("http://192.168.100.214:8081/Foto",root?.context!!,foto);
         }
 
         return root
@@ -61,7 +82,6 @@ class GalleryFragment : Fragment() {
         }else{
             abrirGaleria();
         }
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -87,7 +107,6 @@ class GalleryFragment : Fragment() {
         if(resultCode == Activity.RESULT_OK && requestCode == 777){
             imgLocal?.setImageURI(data?.data);
             parsearIMagenBase64();
-            parsearBase64Imagen();
         }
     }
 

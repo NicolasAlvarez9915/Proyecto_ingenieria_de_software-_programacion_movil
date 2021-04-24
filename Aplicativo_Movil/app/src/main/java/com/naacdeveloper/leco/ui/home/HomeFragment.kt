@@ -49,7 +49,7 @@ class HomeFragment : Fragment(), CompletadoListener {
         btnSolicitudHttp?.setOnClickListener {
             if(listener?.HayRed() == true){
 
-                PeticionesHtml(this).execute("http://192.168.100.214:8081/weatherforecast");
+                PeticionesHtml(this).execute("http://192.168.100.214:8081/api/Inmueble/Fotos/string");
             }else{
                 Toast.makeText(root?.context, "No hay red", Toast.LENGTH_LONG).show();
             }
