@@ -86,20 +86,13 @@ class GalleryFragment : Fragment() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
         if(requestCode == 777){
             if(grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 abrirGaleria( );
-            }else{
-                Toast.makeText(root?.context, "Permiso denegado", Toast.LENGTH_LONG).show();
-            }
-            if(grantResults.isEmpty() && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                abrirGaleria( );
-            }else{
+            }else {
                 Toast.makeText(root?.context, "Permiso denegado", Toast.LENGTH_LONG).show();
             }
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
