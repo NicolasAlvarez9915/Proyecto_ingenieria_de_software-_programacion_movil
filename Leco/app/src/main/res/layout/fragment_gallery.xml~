@@ -145,7 +145,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Imagen"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
