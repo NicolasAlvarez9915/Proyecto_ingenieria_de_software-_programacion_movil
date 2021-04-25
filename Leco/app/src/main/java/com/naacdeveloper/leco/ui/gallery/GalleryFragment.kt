@@ -96,10 +96,9 @@ class GalleryFragment : Fragment() {
         inmueble?.descripcion = etDescripcion?.text.toString();
         if(!InmuebleService.subirInmueble("/api/Inmueble",root?.context!!, inmueble!!)){
             if(!InmuebleService.subirFoto("/Foto",root?.context!!, fotoInmueble!!)){
-                MostrarMensaje("¡Inmueble subido exitosamente!")
+                MostrarMensaje("¡Inmueble subido exitosamente!");
             }
         }
-
     }
 
     private fun inicializarVariables(){
@@ -160,8 +159,6 @@ class GalleryFragment : Fragment() {
         }
     }
 
-
-
     fun alerta(Mensaje:String){
         val mAlertDialog = AlertDialog.Builder(root?.context!!)
         mAlertDialog.setIcon(R.mipmap.ic_launcher_round)
@@ -172,6 +169,7 @@ class GalleryFragment : Fragment() {
         }
         mAlertDialog.show()
     }
+
     fun  MostrarMensaje(Mensaje:String){
         val mAlertDialog = AlertDialog.Builder(root?.context!!)
         mAlertDialog.setIcon(R.mipmap.ic_launcher) //Icono de la alerta
@@ -180,6 +178,6 @@ class GalleryFragment : Fragment() {
         mAlertDialog.setNegativeButton("Ok") { dialog, id ->
             Toast.makeText(root?.context, "Ok", Toast.LENGTH_SHORT).show()
         }
-        mAlertDialog.show()
+        mAlertDialog.show();
     }
 }

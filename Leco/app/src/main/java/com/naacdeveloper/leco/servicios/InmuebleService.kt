@@ -19,8 +19,6 @@ import java.io.ByteArrayOutputStream
 
 class InmuebleService {
 
-
-
     companion object{
         val baseUrl:String = "http://192.168.100.214:8081";
         fun parsearIMagenBase64(img: ImageView): String {
