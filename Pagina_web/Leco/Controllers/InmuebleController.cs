@@ -34,6 +34,16 @@ namespace leco.Controllers
             return inmuebles;
         }
 
+        [HttpGet("/Buscar/Inmueble/Direccion/{Direccion}")]
+        public ActionResult<InmuebleViewModel> GetInmuebleDireccion(String Direccion)
+        {
+            var response = Service.BuscarInmueblePorDireccion(Direccion);
+            if(response.Error){
+                return BadRequest(response.Mensaje);
+            }
+            return new InmuebleViewModel(response.Object);
+        }
+
         [HttpPost("/Foto")]
         public ActionResult<fotoInmuebleView> PostFotoInmueble(fotoInmuebleInput Input)
         {
@@ -46,6 +56,13 @@ namespace leco.Controllers
         public IEnumerable<fotoInmuebleView> GetFotos()
         {
             var fotos = Service.Fotos().Select(p => new fotoInmuebleView(p));
+            return fotos;
+        }
+
+        [HttpGet("Fotos/Inmueble")]
+        public IEnumerable<fotoInmuebleView> GetFotosInmueble(string codigo)
+        {
+            var fotos = Service.FotosInmueble(codigo).Select(p => new fotoInmuebleView(p));
             return fotos;
         }
 
@@ -75,7 +92,8 @@ namespace leco.Controllers
                 Descripcion = input.Descripcion,
                 direccion = input.direccion,
                 Estado = input.Estado,
-                Nombre = input.Nombre
+                Nombre = input.Nombre,
+                fotos = input.fotos.Select(f => MapearFotoInmueble(f)).ToList()
             };
         }
     }

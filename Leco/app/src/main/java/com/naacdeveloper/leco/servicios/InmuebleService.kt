@@ -8,19 +8,21 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.Base64
 import android.util.Log
 import android.widget.ImageView
-import android.widget.Toast
+import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import com.naacdeveloper.leco.modelos.FotoInmueble
 import com.naacdeveloper.leco.modelos.Inmueble
-import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+
 
 class InmuebleService {
 
     companion object{
         val baseUrl:String = "http://192.168.100.214:8081";
+
         fun parsearIMagenBase64(img: ImageView): String {
             val bitmap = (img.drawable as BitmapDrawable).bitmap
             if (bitmap != null) {
@@ -39,65 +41,42 @@ class InmuebleService {
             return img;
         }
 
-        fun subirFoto(url: String, context: Context, fotoInmueble: FotoInmueble): Boolean{
+        fun registrarInmueble(context: Context, inmueble: Inmueble){
             val cola = Volley.newRequestQueue(context);
-            var error = false;
-            var dialog = ProgressDialog.show(context, "", "Espere un momento...", true);
+            var dialog = ProgressDialog.show(context, "Validando direccion duplicada.", "Espere un momento...", true);
 
+            val solicitud = object :StringRequest(
+                    Request.Method.GET,
+                    baseUrl + "/Buscar/Inmueble/Direccion/${inmueble.direccion}",
+                    Response.Listener<String> {
+                        dialog.dismiss();
+                        Mensajes.alerta("Ya existe un inmueble registrado con esta direccion.", context);
+                    },
+                    Response.ErrorListener { r ->
+                        Mensajes.alerta(r.printStackTrace().toString(), context);
+                        dialog.dismiss();
+                        subirInmueble("/api/Inmueble", context, inmueble);
+                    }){}
 
-            val jsonBody = JSONObject()
-            jsonBody.put("codigo", fotoInmueble.codigo)
-            jsonBody.put("codInmueble", fotoInmueble.codInmueble)
-            jsonBody.put("imagen", fotoInmueble.imagen)
-
-            val requestBody = jsonBody.toString()
-
-            val solicitud: StringRequest = object : StringRequest(
-                Method.POST, baseUrl+url,
-                Response.Listener {
-                    dialog.dismiss();
-                }, Response.ErrorListener {
-                        response ->
-                    Toast.makeText(context, "Fallo al subir la imagen.", Toast.LENGTH_LONG).show();
-                    error = true;
-                    dialog.dismiss();
-                }){
-                override fun getBodyContentType(): String {
-                    return "application/json; charset=utf-8";
-                }
-                override fun getBody(): ByteArray {
-                    return requestBody.toByteArray()
-                }
-            }
             cola.add(solicitud);
-            return  error;
         }
 
-        fun subirInmueble(url: String, context: Context, inmueble: Inmueble): Boolean{
+        fun subirFoto(url: String, context: Context, fotoInmueble: FotoInmueble){
             val cola = Volley.newRequestQueue(context);
-            var error: Boolean = false;
             var dialog = ProgressDialog.show(context, "", "Espere un momento...", true);
 
 
-            val jsonBody = JSONObject()
-            jsonBody.put("codigo", inmueble.codigo);
-            jsonBody.put("nombre", inmueble.nombre);
-            jsonBody.put("estado", inmueble.estado);
-            jsonBody.put("direccion", inmueble.direccion);
-            jsonBody.put("descripcion", inmueble.descripcion);
-
-            val requestBody = jsonBody.toString()
+            val gson = Gson();
+            val requestBody = gson.toJson(fotoInmueble);
 
             val solicitud: StringRequest = object : StringRequest(
-                Method.POST, baseUrl+url,
-                Response.Listener {
-                    dialog.dismiss();
-                }, Response.ErrorListener {
-                        response ->
-                    Toast.makeText(context, "Fallo al subir el inmueble.", Toast.LENGTH_LONG).show();
-                    error = true;
-                    dialog.dismiss();
-                }){
+                    Method.POST, baseUrl + url,
+                    Response.Listener {
+                        dialog.dismiss();
+                    }, Response.ErrorListener { response ->
+                Mensajes.alerta("¡Error al subir la foto!", context);
+                dialog.dismiss();
+            }){
                 override fun getBodyContentType(): String {
                     return "application/json; charset=utf-8";
                 }
@@ -106,7 +85,34 @@ class InmuebleService {
                 }
             }
             cola.add(solicitud);
-            return error;
+        }
+
+        fun subirInmueble(url: String, context: Context, inmueble: Inmueble){
+            val cola = Volley.newRequestQueue(context);
+            var dialog = ProgressDialog.show(context, "Enviando inmueble al servidor", "Espere un momento...", true);
+
+            val gson = Gson();
+            val requestBody = gson.toJson(inmueble);
+
+            val solicitud: StringRequest = object : StringRequest(
+                    Method.POST, baseUrl + url,
+                    Response.Listener {
+                        Mensajes.MostrarMensaje("¡Inmueble subido exitosamente!", context);
+                        dialog.dismiss();
+                    }, Response.ErrorListener { response ->
+                Mensajes.alerta("¡Error al subir el inmueble!", context);
+                dialog.dismiss();
+            }){
+                override fun getBodyContentType(): String {
+                    return "application/json; charset=utf-8";
+                }
+                override fun getBody(): ByteArray {
+                    return requestBody.toByteArray()
+                }
+            }
+            cola.add(solicitud);
+
+            
         }
     }
 

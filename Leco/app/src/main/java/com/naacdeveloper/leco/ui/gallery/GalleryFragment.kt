@@ -19,6 +19,7 @@ import com.naacdeveloper.leco.R
 import com.naacdeveloper.leco.modelos.FotoInmueble
 import com.naacdeveloper.leco.modelos.Inmueble
 import com.naacdeveloper.leco.servicios.InmuebleService
+import com.naacdeveloper.leco.servicios.Mensajes
 
 class GalleryFragment : Fragment() {
 
@@ -83,7 +84,7 @@ class GalleryFragment : Fragment() {
         if(error){
             mensaje+=datosFaltantes;
             mensaje+="\nPor favor verifique.";
-            alerta(mensaje);
+            Mensajes.alerta(mensaje, root?.context!!);
         }else{
              registrarInmueble();
         }
@@ -94,11 +95,7 @@ class GalleryFragment : Fragment() {
         inmueble?.direccion = etDireccion?.text.toString();
         inmueble?.nombre = etNombre?.text.toString();
         inmueble?.descripcion = etDescripcion?.text.toString();
-        if(!InmuebleService.subirInmueble("/api/Inmueble",root?.context!!, inmueble!!)){
-            if(!InmuebleService.subirFoto("/Foto",root?.context!!, fotoInmueble!!)){
-                MostrarMensaje("¡Inmueble subido exitosamente!");
-            }
-        }
+        InmuebleService.registrarInmueble(root?.context!!,inmueble!!);
     }
 
     private fun inicializarVariables(){
@@ -106,7 +103,7 @@ class GalleryFragment : Fragment() {
         ibAgregarFoto = root?.findViewById(R.id.ibAgregarFoto);
         btnAgregarInmueble = root?.findViewById(R.id.btnAgregarInmueble);
 
-        inmueble = Inmueble("Defecto","Defecto","Defecto","Defecto","Defecto",null);
+        inmueble = Inmueble("Defecto","Defecto","Defecto","Defecto","Defecto", ArrayList());
         fotoInmueble = FotoInmueble("Defecto","Defecto","Defecto");
 
         etNombre = root?.findViewById(R.id.etNombre);
@@ -131,7 +128,7 @@ class GalleryFragment : Fragment() {
 
     private fun pedirPerdisoAlmacenamiento() {
         if(ActivityCompat.shouldShowRequestPermissionRationale(root?.context as Activity, android.Manifest.permission.READ_EXTERNAL_STORAGE)){
-            MostrarMensaje("Permiso denegado, debe permitirlo manualmente.");
+            Mensajes.MostrarMensaje("Permiso denegado, debe permitirlo manualmente.",root?.context!!);
         }else{
             ActivityCompat.requestPermissions(root?.context as Activity, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 777);
         }
@@ -144,7 +141,7 @@ class GalleryFragment : Fragment() {
             if(grantResults.isEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 abrirGaleria();
             }else {
-                MostrarMensaje("Permiso denegado");
+                Mensajes.MostrarMensaje("Permiso denegado",root?.context!!);
             }
         }
     }
@@ -155,29 +152,9 @@ class GalleryFragment : Fragment() {
             imgLocal?.setImageURI(data?.data);
             imgB64 = InmuebleService.parsearIMagenBase64(imgLocal!!);
             fotoInmueble?.imagen = imgB64!!;
-            MostrarMensaje("¡Imagen agregada correctamente!");
+            inmueble?.fotos?.add(fotoInmueble!!);
+            Mensajes.MostrarMensaje("¡Imagen agregada correctamente!", root?.context!!);
         }
     }
 
-    fun alerta(Mensaje:String){
-        val mAlertDialog = AlertDialog.Builder(root?.context!!)
-        mAlertDialog.setIcon(R.mipmap.ic_launcher_round)
-        mAlertDialog.setTitle("Alerta!")
-        mAlertDialog.setMessage(Mensaje)
-        mAlertDialog.setNegativeButton("Ok") { dialog, id ->
-            Toast.makeText(root?.context, "Ok", Toast.LENGTH_SHORT).show()
-        }
-        mAlertDialog.show()
-    }
-
-    fun  MostrarMensaje(Mensaje:String){
-        val mAlertDialog = AlertDialog.Builder(root?.context!!)
-        mAlertDialog.setIcon(R.mipmap.ic_launcher) //Icono de la alerta
-        mAlertDialog.setTitle("En hora buena!") //Titulo de la alerta
-        mAlertDialog.setMessage(Mensaje) //Mensaje de la alerta
-        mAlertDialog.setNegativeButton("Ok") { dialog, id ->
-            Toast.makeText(root?.context, "Ok", Toast.LENGTH_SHORT).show()
-        }
-        mAlertDialog.show();
-    }
 }

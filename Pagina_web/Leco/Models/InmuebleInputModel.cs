@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Entity;
 
 namespace leco.Models
@@ -10,6 +11,7 @@ namespace leco.Models
         public String Estado { get; set; }
         public String direccion { get; set; }
         public String Descripcion { get; set; }
+        public List<fotoInmuebleInput> fotos { get; set; }
     }
 
     public class InmuebleViewModel: InmuebleInputModel{
