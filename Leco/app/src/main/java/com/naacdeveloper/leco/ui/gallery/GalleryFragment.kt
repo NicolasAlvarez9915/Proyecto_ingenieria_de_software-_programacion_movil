@@ -8,13 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.naacdeveloper.leco.R
 import com.naacdeveloper.leco.modelos.FotoInmueble
 import com.naacdeveloper.leco.modelos.Inmueble
@@ -86,7 +82,11 @@ class GalleryFragment : Fragment() {
             mensaje+="\nPor favor verifique.";
             Mensajes.alerta(mensaje, root?.context!!);
         }else{
-             registrarInmueble();
+             if(InmuebleService.hayRed(root?.context as Activity)){
+                 registrarInmueble();
+             }else{
+                 Mensajes.alerta("No hay conexion a internet.", root?.context!!);
+             }
         }
     }
 

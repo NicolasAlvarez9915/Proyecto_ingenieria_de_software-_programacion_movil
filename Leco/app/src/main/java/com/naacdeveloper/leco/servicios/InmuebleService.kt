@@ -1,20 +1,26 @@
 package com.naacdeveloper.leco.servicios
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.ConnectivityManager
 import android.util.Base64
 import android.util.Log
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
+import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.naacdeveloper.leco.modelos.FotoInmueble
 import com.naacdeveloper.leco.modelos.Inmueble
+import com.naacdeveloper.leco.modelos.Inmuebles
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 
 
@@ -52,19 +58,17 @@ class InmuebleService {
                         dialog.dismiss();
                         Mensajes.alerta("Ya existe un inmueble registrado con esta direccion.", context);
                     },
-                    Response.ErrorListener { r ->
-                        Mensajes.alerta(r.printStackTrace().toString(), context);
+                    Response.ErrorListener {
                         dialog.dismiss();
                         subirInmueble("/api/Inmueble", context, inmueble);
-                    }){}
-
+                    }
+            ){}
             cola.add(solicitud);
         }
 
         fun subirFoto(url: String, context: Context, fotoInmueble: FotoInmueble){
             val cola = Volley.newRequestQueue(context);
             var dialog = ProgressDialog.show(context, "", "Espere un momento...", true);
-
 
             val gson = Gson();
             val requestBody = gson.toJson(fotoInmueble);
@@ -111,8 +115,60 @@ class InmuebleService {
                 }
             }
             cola.add(solicitud);
+        }
 
-            
+        fun obtenerInmuebles(cola: RequestQueue, context: Context, rvInmuebles: RecyclerView){
+
+
+            val solicitud = object:StringRequest(
+                    Request.Method.GET,
+                    "http://192.168.100.214:8081/InmueblesConFotoPrincipal",
+                    Response.Listener { response ->
+                        try {
+                            val gson = Gson();
+                            var inmuebelsJson = "{ \"inmuebles\":$response}";
+                            var inmueblesRespuesta = gson.fromJson(inmuebelsJson, Inmuebles::class.java)
+
+                            var adaptador = AdaptadorPersonalizado(context!!, inmueblesRespuesta.inmuebles);
+
+                            rvInmuebles?.adapter = adaptador;
+                        } catch (e: Exception) {
+
+                        }
+                    },
+                    Response.ErrorListener { }){}
+
+            cola.add(solicitud);
+        }
+
+        fun hayRed(activity: Activity):Boolean{
+            val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager;
+            val networkInfo = connectivityManager.activeNetworkInfo;
+            return  networkInfo != null && networkInfo.isConnected;
+        }
+
+        fun ActualizarInmuebe(context: Context,inmueble: Inmueble){
+            val cola = Volley.newRequestQueue(context);
+            val gson = Gson();
+            val requestBody = gson.toJson(inmueble);
+
+            val putRequest: StringRequest = object : StringRequest(Method.PUT, baseUrl+"/api/Inmueble/${inmueble.codigo}",
+                    Response.Listener { response -> // response
+                        Log.d("Response", response);
+                    },
+                    Response.ErrorListener {// error
+                        Log.d("Error", "Error");
+                    }
+            ) {
+                override fun getBodyContentType(): String {
+                    return "application/json; charset=utf-8";
+                }
+                override fun getBody(): ByteArray {
+                    return requestBody.toByteArray();
+                }
+            }
+
+            cola.add(putRequest);
         }
     }
 

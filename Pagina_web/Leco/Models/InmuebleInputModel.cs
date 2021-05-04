@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Entity;
 
 namespace leco.Models
@@ -26,6 +27,14 @@ namespace leco.Models
             Estado = inmueble.Estado;
             direccion = inmueble.direccion;
             Descripcion = inmueble.Descripcion;
+            fotos = inmueble.fotos.Select(p => MapearFotoInmuebleView(p)).ToList();
+        }
+        private fotoInmuebleInput MapearFotoInmuebleView(fotoInmueble foto){
+            return new fotoInmuebleInput{
+                Codigo = foto.Codigo,
+                CodInmueble = foto.CodInmueble,
+                Imagen = Convert.ToBase64String(foto.Imagen)
+            };
         }
     }
 }

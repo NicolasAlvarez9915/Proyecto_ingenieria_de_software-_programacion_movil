@@ -1,24 +1,55 @@
 package com.naacdeveloper.leco.ui.home
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import com.naacdeveloper.leco.R
+import com.naacdeveloper.leco.modelos.Inmueble
+import com.naacdeveloper.leco.modelos.Inmuebles
+import com.naacdeveloper.leco.servicios.AdaptadorPersonalizado
+import com.naacdeveloper.leco.servicios.InmuebleService
+import com.naacdeveloper.leco.servicios.Mensajes
 
 class HomeFragment : Fragment() {
+
+    var rvInmuebles: RecyclerView? = null;
+    var layoutManager: RecyclerView.LayoutManager? = null;
+    var root: View? = null;
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
 
+        root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        if(InmuebleService.hayRed(root?.context as Activity)){
+                rvInmuebles = root?.findViewById(R.id.rvInmuebles);
+                rvInmuebles?.setHasFixedSize(true);
+                layoutManager = LinearLayoutManager(root?.context)
+                rvInmuebles?.layoutManager = layoutManager;
+                val cola = Volley.newRequestQueue(root?.context);
+                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!)
+        }else{
+            Mensajes.alerta("No hay conexion a internet.", root?.context!!);
+        }
         return root
     }
 }

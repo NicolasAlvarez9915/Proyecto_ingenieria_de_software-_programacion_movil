@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Datos;
@@ -46,6 +47,18 @@ namespace Logica
             return context.Inmuebles.ToList();
         }
 
+        public List<Inmueble> InmueblesConFotoPrincipal(){
+            List<Inmueble> inmuebles = context.Inmuebles.ToList();
+            foreach (var iterador in inmuebles)
+            {
+                List<fotoInmueble> fotos = new List<fotoInmueble>();
+                fotoInmueble foto = Foto(iterador.codigo).Object;
+                fotos.Add(foto); 
+                iterador.fotos = fotos;
+            }
+            return inmuebles;
+        }
+
         public List<fotoInmueble> Fotos(){
             return context.FotoInmuebles.ToList();
         }
@@ -66,7 +79,7 @@ namespace Logica
 
         public Response<fotoInmueble> Foto(string codigo)
         {
-            fotoInmueble foto = context.FotoInmuebles.Find(codigo);
+            fotoInmueble foto = context.FotoInmuebles.Where(u => u.CodInmueble == codigo).FirstOrDefault();
             if(foto == null){
                 return new Response<fotoInmueble>("No existe");
             }
