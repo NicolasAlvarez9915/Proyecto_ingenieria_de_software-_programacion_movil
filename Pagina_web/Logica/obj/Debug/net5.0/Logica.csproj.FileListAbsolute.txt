@@ -15,3 +15,20 @@ E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Deb
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.dll
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\ref\Logica.dll
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Logica.deps.json
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Logica.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\ref\Logica.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Logica.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Datos.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Entity.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Entity.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\bin\Debug\net5.0\Datos.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.csprojAssemblyReference.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.AssemblyInfoInputs.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.AssemblyInfo.cs
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.csproj.CoreCompileInputs.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.csproj.CopyComplete
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\ref\Logica.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Logica\obj\Debug\net5.0\Logica.pdb

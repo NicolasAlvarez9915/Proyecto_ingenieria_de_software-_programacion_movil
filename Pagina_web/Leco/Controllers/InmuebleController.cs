@@ -107,9 +107,10 @@ namespace leco.Controllers
         }
 
         [HttpPut("{codigo}")]
-        public ActionResult<String> Put(string codigo, InmuebleInputModel Input)
+        public ActionResult<String> Put(InmuebleInputModel Input)
         {
-            //service.ActualizarInfo(MapearAdministrador(administradorInput));
+            
+            var mensaje = Service.ActualizarInmueble(Input);
             return Ok("Correcto");
         }
     }

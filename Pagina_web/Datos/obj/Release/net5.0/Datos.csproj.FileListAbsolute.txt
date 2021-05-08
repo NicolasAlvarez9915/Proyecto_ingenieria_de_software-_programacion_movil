@@ -16,3 +16,21 @@ E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Datos\obj\Rele
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Datos\obj\Release\net5.0\ref\Datos.dll
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.pdb
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.genruntimeconfig.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Datos.deps.json
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Datos.runtimeconfig.json
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Datos.runtimeconfig.dev.json
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Datos.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\ref\Datos.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Datos.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Entity.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\bin\Release\net5.0\Entity.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.csprojAssemblyReference.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.AssemblyInfoInputs.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.AssemblyInfo.cs
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.csproj.CoreCompileInputs.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.csproj.CopyComplete
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\ref\Datos.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Datos\obj\Release\net5.0\Datos.genruntimeconfig.cache

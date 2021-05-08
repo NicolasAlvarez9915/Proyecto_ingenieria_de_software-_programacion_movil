@@ -10,3 +10,15 @@ E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Entity\obj\Deb
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.dll
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\ref\Entity.dll
 E:\Proyecto_ingenieria_de_software _programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\Entity.deps.json
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\Entity.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\ref\Entity.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\Entity.pdb
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.csprojAssemblyReference.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.AssemblyInfoInputs.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.AssemblyInfo.cs
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.csproj.CoreCompileInputs.cache
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\ref\Entity.dll
+C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.pdb

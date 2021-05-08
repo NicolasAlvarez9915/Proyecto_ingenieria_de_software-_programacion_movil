@@ -90,5 +90,26 @@ namespace Logica
             return context.FotoInmuebles.Where(u => u.Codigo == codigo).ToList();
         }
 
+        public Response<Inmueble> ActualizarInmueble(Inmueble inmuebleNuevo){
+            try{
+                var inmuebleViejo = context.Inmuebles.Find(inmuebleNuevo.codigo);
+                if(inmuebleViejo != null){
+                    inmuebleViejo.Nombre = inmuebleNuevo.Nombre;
+                    inmuebleViejo.Estado = inmuebleNuevo.Estado;
+                    inmuebleViejo.direccion = inmuebleNuevo.direccion;
+                    inmuebleViejo.Descripcion = inmuebleNuevo.Descripcion;
+                    context.Inmuebles.Update(inmuebleViejo);
+                    context.SaveChanges();
+                    return new Response<Inmueble>(inmuebleNuevo);
+                }
+                else{
+                    return new Response<Inmueble>($"Lo sentimos, el Inmueble con dirección {inmuebleNuevo.direccion} no se encuentra registrado.");
+                }
+            }
+            catch (Exception e){
+                return new Response<Inmueble>($"Error de la Aplicación: {e.Message}");
+            }
+        }
+
     }
 }

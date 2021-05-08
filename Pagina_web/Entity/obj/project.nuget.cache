@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "36N8SDMukj7DEe1qoOjfwy/V0cbWh75bRzIHUZofLY6/KAIUD28FNDwnrLeXzY8QTweH7zj2LfGtOUsANz6mQQ==",
+  "dgSpecHash": "jtUTzNgFshliY5YxEO6QhC9W20GghRvhPLxFrR52YQtwl7heF9DXGovc6qTOagNp1yr2gMjdeJJQWp4FHfI86A==",
   "success": true,
-  "projectFilePath": "E:\\Proyecto_ingenieria_de_software _programacion_movil\\Pagina_web\\Entity\\Entity.csproj",
+  "projectFilePath": "C:\\Proyecto2021Movil\\Proyecto_ingenieria_de_software-_programacion_movil\\Pagina_web\\Entity\\Entity.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Nicolas Alvarez\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+    "C:\\Users\\AlexAC\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

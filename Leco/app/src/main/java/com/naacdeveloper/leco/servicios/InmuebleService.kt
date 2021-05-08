@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.util.Base64
-import android.util.Log
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -17,10 +16,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.naacdeveloper.leco.modelos.FotoInmueble
 import com.naacdeveloper.leco.modelos.Inmueble
 import com.naacdeveloper.leco.modelos.Inmuebles
-import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 
 
@@ -49,19 +48,27 @@ class InmuebleService {
 
         fun registrarInmueble(context: Context, inmueble: Inmueble){
             val cola = Volley.newRequestQueue(context);
-            var dialog = ProgressDialog.show(context, "Validando direccion duplicada.", "Espere un momento...", true);
+            var dialog = ProgressDialog.show(
+                context,
+                "Validando direccion duplicada.",
+                "Espere un momento...",
+                true
+            );
 
             val solicitud = object :StringRequest(
-                    Request.Method.GET,
-                    baseUrl + "/Buscar/Inmueble/Direccion/${inmueble.direccion}",
-                    Response.Listener<String> {
-                        dialog.dismiss();
-                        Mensajes.alerta("Ya existe un inmueble registrado con esta direccion.", context);
-                    },
-                    Response.ErrorListener {
-                        dialog.dismiss();
-                        subirInmueble("/api/Inmueble", context, inmueble);
-                    }
+                Request.Method.GET,
+                baseUrl + "/Buscar/Inmueble/Direccion/${inmueble.direccion}",
+                Response.Listener<String> {
+                    dialog.dismiss();
+                    Mensajes.alerta(
+                        "Ya existe un inmueble registrado con esta direccion.",
+                        context
+                    );
+                },
+                Response.ErrorListener {
+                    dialog.dismiss();
+                    subirInmueble("/api/Inmueble", context, inmueble);
+                }
             ){}
             cola.add(solicitud);
         }
@@ -74,13 +81,13 @@ class InmuebleService {
             val requestBody = gson.toJson(fotoInmueble);
 
             val solicitud: StringRequest = object : StringRequest(
-                    Method.POST, baseUrl + url,
-                    Response.Listener {
-                        dialog.dismiss();
-                    }, Response.ErrorListener { response ->
-                Mensajes.alerta("¡Error al subir la foto!", context);
-                dialog.dismiss();
-            }){
+                Method.POST, baseUrl + url,
+                Response.Listener {
+                    dialog.dismiss();
+                }, Response.ErrorListener { response ->
+                    Mensajes.alerta("¡Error al subir la foto!", context);
+                    dialog.dismiss();
+                }){
                 override fun getBodyContentType(): String {
                     return "application/json; charset=utf-8";
                 }
@@ -93,20 +100,25 @@ class InmuebleService {
 
         fun subirInmueble(url: String, context: Context, inmueble: Inmueble){
             val cola = Volley.newRequestQueue(context);
-            var dialog = ProgressDialog.show(context, "Enviando inmueble al servidor", "Espere un momento...", true);
+            var dialog = ProgressDialog.show(
+                context,
+                "Enviando inmueble al servidor",
+                "Espere un momento...",
+                true
+            );
 
             val gson = Gson();
             val requestBody = gson.toJson(inmueble);
 
             val solicitud: StringRequest = object : StringRequest(
-                    Method.POST, baseUrl + url,
-                    Response.Listener {
-                        Mensajes.MostrarMensaje("¡Inmueble subido exitosamente!", context);
-                        dialog.dismiss();
-                    }, Response.ErrorListener { response ->
-                Mensajes.alerta("¡Error al subir el inmueble!", context);
-                dialog.dismiss();
-            }){
+                Method.POST, baseUrl + url,
+                Response.Listener {
+                    Mensajes.MostrarMensaje("¡Inmueble subido exitosamente!", context);
+                    dialog.dismiss();
+                }, Response.ErrorListener { response ->
+                    Mensajes.alerta("¡Error al subir el inmueble!", context);
+                    dialog.dismiss();
+                }){
                 override fun getBodyContentType(): String {
                     return "application/json; charset=utf-8";
                 }
@@ -121,22 +133,28 @@ class InmuebleService {
 
 
             val solicitud = object:StringRequest(
-                    Request.Method.GET,
-                    "http://192.168.100.214:8081/InmueblesConFotoPrincipal",
-                    Response.Listener { response ->
-                        try {
-                            val gson = Gson();
-                            var inmuebelsJson = "{ \"inmuebles\":$response}";
-                            var inmueblesRespuesta = gson.fromJson(inmuebelsJson, Inmuebles::class.java)
+                Request.Method.GET,
+                "http://192.168.100.214:8081/InmueblesConFotoPrincipal",
+                Response.Listener { response ->
+                    try {
+                        val gson = Gson();
+                        var inmuebelsJson = "{ \"inmuebles\":$response}";
+                        var inmueblesRespuesta = gson.fromJson(
+                            inmuebelsJson,
+                            Inmuebles::class.java
+                        )
 
-                            var adaptador = AdaptadorPersonalizado(context!!, inmueblesRespuesta.inmuebles);
+                        var adaptador = AdaptadorPersonalizado(
+                            context!!,
+                            inmueblesRespuesta.inmuebles
+                        );
 
-                            rvInmuebles?.adapter = adaptador;
-                        } catch (e: Exception) {
+                        rvInmuebles?.adapter = adaptador;
+                    } catch (e: Exception) {
 
-                        }
-                    },
-                    Response.ErrorListener { }){}
+                    }
+                },
+                Response.ErrorListener { }){}
 
             cola.add(solicitud);
         }
@@ -147,18 +165,45 @@ class InmuebleService {
             return  networkInfo != null && networkInfo.isConnected;
         }
 
-        fun ActualizarInmuebe(context: Context,inmueble: Inmueble){
+        fun buscarInmuebletoActualizar(context: Context, inmueble: Inmueble){
+            val gson = Gson()
+
+            val cola = Volley.newRequestQueue(context);
+            val solicitud = object :StringRequest(
+                Request.Method.GET,
+                baseUrl + "/Buscar/Inmueble/Direccion/${inmueble.direccion}",
+                Response.Listener<String> { response ->
+                    val inmueble = gson.fromJson(response, Inmueble::class.java)
+                    actualizarInmueble(context, inmueble)
+                    Mensajes.alerta(
+                        "Ya existe un inmueble registrado con esta direccion.",
+                        context
+                    );
+                },
+                Response.ErrorListener {
+
+                    subirInmueble("/api/Inmueble", context, inmueble);
+                }
+            ){}
+            cola.add(solicitud);
+        }
+
+        fun actualizarInmueble(context: Context, inmueble: Inmueble){
             val cola = Volley.newRequestQueue(context);
             val gson = Gson();
             val requestBody = gson.toJson(inmueble);
 
-            val putRequest: StringRequest = object : StringRequest(Method.PUT, baseUrl+"/api/Inmueble/${inmueble.codigo}",
-                    Response.Listener { response -> // response
-                        Log.d("Response", response);
-                    },
-                    Response.ErrorListener {// error
-                        Log.d("Error", "Error");
-                    }
+            val putRequest: StringRequest = object : StringRequest(Method.PUT,
+                baseUrl + "/api/Inmueble/${inmueble}",
+                Response.Listener {
+                    Mensajes.MostrarMensaje("Inmueble Actualizado Correctamente", context)
+                },
+                Response.ErrorListener {
+                    Mensajes.MostrarMensaje(
+                        "Se produjo un error, intentelo nuevamente",
+                        context
+                    )
+                }
             ) {
                 override fun getBodyContentType(): String {
                     return "application/json; charset=utf-8";
