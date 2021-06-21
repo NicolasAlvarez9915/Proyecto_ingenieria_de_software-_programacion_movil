@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -155,7 +156,7 @@ class InmuebleService {
             cola.add(solicitud);
         }
 
-        fun obtenerInmuebles(cola: RequestQueue, context: Context, rvInmuebles: RecyclerView, abrirActualizar: AbrirActualizar){
+        fun obtenerInmuebles(cola: RequestQueue, context: Context, rvInmuebles: RecyclerView, abrirActualizar: AbrirActualizar, Refres: SwipeRefreshLayout?){
 
 
             val solicitud = object:StringRequest(
@@ -177,6 +178,9 @@ class InmuebleService {
                         },
                             inmueblesRespuesta.inmuebles
                         );
+                        if(Refres != null){
+                            Refres.isRefreshing = false;
+                        }
 
                         rvInmuebles?.adapter = adaptador;
                     } catch (e: Exception) {

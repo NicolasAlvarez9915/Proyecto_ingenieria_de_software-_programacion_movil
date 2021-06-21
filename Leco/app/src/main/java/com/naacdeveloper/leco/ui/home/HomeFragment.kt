@@ -52,7 +52,7 @@ class HomeFragment : Fragment(), AbrirActualizar {
                 rvInmuebles?.layoutManager = layoutManager;
                 val cola = Volley.newRequestQueue(root?.context);
 
-                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!, this)
+                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!, this, null)
         }else{
             Mensajes.alerta("No hay conexion a internet.", root?.context!!);
         }
@@ -66,11 +66,11 @@ class HomeFragment : Fragment(), AbrirActualizar {
                 rvInmuebles?.layoutManager = layoutManager;
                 val cola = Volley.newRequestQueue(root?.context);
 
-                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!, this)
+                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!, this,Refres)
             }else{
                 Mensajes.alerta("No hay conexion a internet.", root?.context!!);
             }
-            Refres.isRefreshing = false;
+
         }
         return root
     }
