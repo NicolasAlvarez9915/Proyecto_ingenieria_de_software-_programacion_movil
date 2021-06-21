@@ -22,7 +22,6 @@ namespace leco.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult<InmuebleViewModel> Post(InmuebleInputModel Input)
         {
             Inmueble inmueble = MapearInmueble(Input);
@@ -90,6 +89,7 @@ namespace leco.Controllers
 
         private fotoInmueble MapearFotoInmueble(fotoInmuebleInput input)
         {
+            if (input == null) return null;
             return new fotoInmueble{
                 Codigo = input.Codigo,
                 CodInmueble = input.CodInmueble,
@@ -99,13 +99,18 @@ namespace leco.Controllers
 
         private Inmueble MapearInmueble(InmuebleInputModel input)
         {
+            List<fotoInmuebleInput> imagenes = new List<fotoInmuebleInput>();
+            if(input.fotos != null)
+            {
+                imagenes = input.fotos;
+            }
             return new Inmueble{
                 codigo = input.codigo,
                 Descripcion = input.Descripcion,
                 direccion = input.direccion,
                 Estado = input.Estado,
                 Nombre = input.Nombre,
-                fotos = input.fotos.Select(f => MapearFotoInmueble(f)).ToList()
+                fotos = imagenes.Select(f => MapearFotoInmueble(f)).ToList()
             };
         }
 
@@ -114,6 +119,14 @@ namespace leco.Controllers
         {
             
             var mensaje = Service.ActualizarInmueble(MapearInmueble(Input));
+            return Ok("Correcto");
+        }
+
+        [HttpDelete("{codigo}")]
+        [AllowAnonymous]
+        public ActionResult<String> Delete(String codigo)
+        {
+            Service.Eliminar(codigo);
             return Ok("Correcto");
         }
     }

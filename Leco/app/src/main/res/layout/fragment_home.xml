@@ -7,8 +7,17 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvInmuebles"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/Refres"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvInmuebles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 </LinearLayout>

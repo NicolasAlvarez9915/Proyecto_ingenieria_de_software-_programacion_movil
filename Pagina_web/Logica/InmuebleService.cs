@@ -111,5 +111,16 @@ namespace Logica
             }
         }
 
+        public void Eliminar(String codigo)
+        {
+            var inmueble = context.Inmuebles.Find(codigo);
+            List<fotoInmueble> fotoInmuebles = context.FotoInmuebles.Where(p => p.CodInmueble == codigo).ToList();
+            foreach(fotoInmueble foto in fotoInmuebles)
+            {
+                context.FotoInmuebles.Remove(foto);
+            }
+            context.Inmuebles.Remove(inmueble);
+            context.SaveChanges();
+        }
     }
 }

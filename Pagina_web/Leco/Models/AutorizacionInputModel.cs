@@ -10,7 +10,7 @@ namespace leco.Models
         public String FraseSecreta { get; set; }
     }
 
-    public class AutorizacionViewModel: AutorizacionInputModel
+    public class AutorizacionViewModel
     {
         public String FraseSecreta { get; set; }
         public string Token { get; set; }

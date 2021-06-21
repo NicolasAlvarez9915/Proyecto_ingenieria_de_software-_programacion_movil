@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -55,12 +56,39 @@ class HomeFragment : Fragment(), AbrirActualizar {
         }else{
             Mensajes.alerta("No hay conexion a internet.", root?.context!!);
         }
+
+        val Refres = root?.findViewById<SwipeRefreshLayout>(R.id.Refres);
+        Refres?.setOnRefreshListener {
+            if(InmuebleService.hayRed(root?.context as Activity)){
+                rvInmuebles = root?.findViewById(R.id.rvInmuebles);
+                rvInmuebles?.setHasFixedSize(true);
+                layoutManager = LinearLayoutManager(root?.context)
+                rvInmuebles?.layoutManager = layoutManager;
+                val cola = Volley.newRequestQueue(root?.context);
+
+                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!, this)
+            }else{
+                Mensajes.alerta("No hay conexion a internet.", root?.context!!);
+            }
+            Refres.isRefreshing = false;
+        }
         return root
     }
 
     override fun abrirActualizar(inmueble: Inmueble) {
-        Toast.makeText(context, inmueble.nombre,Toast.LENGTH_LONG).show();
+
         val intent = Intent (root?.context, Actualizar::class.java);
+        intent.putExtra("codigo", inmueble.codigo);
+        intent.putExtra("nombre", inmueble.nombre);
+        intent.putExtra("descripcion", inmueble.descripcion);
+        intent.putExtra("direccion", inmueble.direccion);
+        intent.putExtra("estado", inmueble.estado);
+
+        val settings = root?.context?.getSharedPreferences("Imagen",0);
+        val editor = settings?.edit();
+        editor?.putString("Imagen", inmueble.fotos!![0].imagen);
+        editor?.commit();
+
         startActivity(intent);
     }
 }

@@ -107,6 +107,13 @@ class InmuebleService {
                 override fun getBody(): ByteArray {
                     return requestBody.toByteArray()
                 }
+                override fun getHeaders(): Map<String, String>? {
+                    val headers: HashMap<String, String> = HashMap()
+                    headers["Content-Type"] = "application/json";
+                    headers.put("Authorization", "Bearer " + AutorizacionService.ObtenerToken(context as Activity));
+                    return headers
+                }
+
             }
             cola.add(solicitud);
         }
@@ -216,7 +223,7 @@ class InmuebleService {
             val requestBody = gson.toJson(inmueble);
 
             val putRequest: StringRequest = object : StringRequest(Method.PUT,
-                baseUrl + "/api/Inmueble/${inmueble}",
+                baseUrl + "api/Inmueble/${inmueble.codigo}",
                 Response.Listener {
                     Mensajes.MostrarMensaje("Inmueble Actualizado Correctamente", context)
                 },
@@ -242,6 +249,38 @@ class InmuebleService {
             }
 
             cola.add(putRequest);
+        }
+
+        fun eliminarInmueble(context: Context, codigo: String){
+            val cola = Volley.newRequestQueue(context);
+            var dialog = ProgressDialog.show(
+                context,
+                "Eliminando inmueble en el servidor",
+                "Espere un momento...",
+                true
+            );
+
+
+            val solicitud: StringRequest = object : StringRequest(
+                Method.DELETE, "http://192.168.0.65:8081/api/Inmueble/$codigo",
+                Response.Listener {
+                    Mensajes.MostrarMensaje("¡Inmueble eliminado exitosamente!", context);
+                    dialog.dismiss();
+                }, Response.ErrorListener { response ->
+                    Mensajes.alerta("¡Error al eliminar el inmueble!${response.message}", context);
+                    dialog.dismiss();
+                }){
+                override fun getBodyContentType(): String {
+                    return "application/json; charset=utf-8";
+                }
+                @Throws(AuthFailureError::class)
+                override fun  getHeaders():  Map<String, String> {
+                    val params: HashMap<String, String> = HashMap();
+                    params["Authorization"] = "Bearer " + AutorizacionService.ObtenerToken(context as Activity);
+                    return params;
+                };
+            }
+            cola.add(solicitud);
         }
     }
 
