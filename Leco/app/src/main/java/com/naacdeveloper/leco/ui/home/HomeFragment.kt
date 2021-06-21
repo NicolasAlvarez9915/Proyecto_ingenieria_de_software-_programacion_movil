@@ -1,6 +1,7 @@
 package com.naacdeveloper.leco.ui.home
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,14 +20,17 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
+import com.naacdeveloper.leco.Actualizar
+import com.naacdeveloper.leco.Autorizacion
 import com.naacdeveloper.leco.R
 import com.naacdeveloper.leco.modelos.Inmueble
 import com.naacdeveloper.leco.modelos.Inmuebles
+import com.naacdeveloper.leco.servicios.AbrirActualizar
 import com.naacdeveloper.leco.servicios.AdaptadorPersonalizado
 import com.naacdeveloper.leco.servicios.InmuebleService
 import com.naacdeveloper.leco.servicios.Mensajes
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), AbrirActualizar {
 
     var rvInmuebles: RecyclerView? = null;
     var layoutManager: RecyclerView.LayoutManager? = null;
@@ -46,10 +50,17 @@ class HomeFragment : Fragment() {
                 layoutManager = LinearLayoutManager(root?.context)
                 rvInmuebles?.layoutManager = layoutManager;
                 val cola = Volley.newRequestQueue(root?.context);
-                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!)
+
+                InmuebleService.obtenerInmuebles(cola,root?.context!!, rvInmuebles!!, this)
         }else{
             Mensajes.alerta("No hay conexion a internet.", root?.context!!);
         }
         return root
+    }
+
+    override fun abrirActualizar(inmueble: Inmueble) {
+        Toast.makeText(context, inmueble.nombre,Toast.LENGTH_LONG).show();
+        val intent = Intent (root?.context, Actualizar::class.java);
+        startActivity(intent);
     }
 }

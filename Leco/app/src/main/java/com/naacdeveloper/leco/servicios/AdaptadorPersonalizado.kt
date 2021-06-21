@@ -10,16 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.naacdeveloper.leco.R
 import com.naacdeveloper.leco.modelos.Inmueble
 
-class AdaptadorPersonalizado(context: Context, items: ArrayList<Inmueble>): RecyclerView.Adapter<AdaptadorPersonalizado.ViewHolder>() {
+class AdaptadorPersonalizado(var listener: ClickListener, items: ArrayList<Inmueble>): RecyclerView.Adapter<AdaptadorPersonalizado.ViewHolder>() {
     var items: ArrayList<Inmueble>? = null;
-    var context: Context? = null;
     init{
         this.items = items;
-        this.context = context;
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdaptadorPersonalizado.ViewHolder {
-        val vista = LayoutInflater.from(context).inflate(R.layout.template_inmuebles,parent,false);
-        val viewHolder = ViewHolder(vista);
+        val vista = LayoutInflater.from(parent?.context).inflate(R.layout.template_inmuebles,parent,false);
+        val viewHolder = ViewHolder(vista,listener);
         return viewHolder;
     }
 
@@ -35,18 +33,25 @@ class AdaptadorPersonalizado(context: Context, items: ArrayList<Inmueble>): Recy
         return this.items?.count()!!;
     }
 
-    class ViewHolder(vista: View): RecyclerView.ViewHolder(vista){
+    class ViewHolder(vista: View, listener: ClickListener): RecyclerView.ViewHolder(vista), View.OnClickListener{
         var vista = vista;
         var foto: ImageView? = null;
         var descripcion: TextView? = null;
         var direccion: TextView? = null;
         var nombre: TextView? = null;
+        var listener: ClickListener? = null;
 
         init {
             foto = vista.findViewById(R.id.ivFoto);
             descripcion = vista.findViewById(R.id.tvDescripcion);
             direccion = vista.findViewById(R.id.tvDireccion);
             nombre = vista.findViewById(R.id.tvNombre);
+            this.listener = listener;
+            vista.setOnClickListener(this);
+        }
+
+        override fun onClick(v: View?) {
+            this.listener?.onClick(v!!, adapterPosition);
         }
     }
 

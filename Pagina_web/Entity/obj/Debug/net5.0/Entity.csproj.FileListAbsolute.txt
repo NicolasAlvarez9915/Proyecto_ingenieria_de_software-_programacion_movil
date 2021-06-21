@@ -22,3 +22,15 @@ C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_
 C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.dll
 C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\ref\Entity.dll
 C:\Proyecto2021Movil\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.pdb
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\Entity.deps.json
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\Entity.dll
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\ref\Entity.dll
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\bin\Debug\net5.0\Entity.pdb
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.csproj.AssemblyReference.cache
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.AssemblyInfoInputs.cache
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.AssemblyInfo.cs
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.csproj.CoreCompileInputs.cache
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.dll
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\ref\Entity.dll
+C:\Users\nicoa\Documents\Proyecto_ingenieria_de_software-_programacion_movil\Pagina_web\Entity\obj\Debug\net5.0\Entity.pdb

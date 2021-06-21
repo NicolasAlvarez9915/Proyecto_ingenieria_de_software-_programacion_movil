@@ -162,7 +162,7 @@ public class "Nombre del controller"Controller : ControllerBase
 
 Verificar version en:
 
-https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools
+https://www.nuget.org/packages/Microsoft.EntityFramewo rkCore.Tools
 
 5-Migraciones
 

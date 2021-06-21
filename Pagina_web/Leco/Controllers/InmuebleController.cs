@@ -5,10 +5,12 @@ using Datos;
 using Entity;
 using leco.Models;
 using Logica;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace leco.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class InmuebleController : ControllerBase
@@ -20,6 +22,7 @@ namespace leco.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult<InmuebleViewModel> Post(InmuebleInputModel Input)
         {
             Inmueble inmueble = MapearInmueble(Input);
@@ -33,7 +36,7 @@ namespace leco.Controllers
             var inmuebles = Service.Inmuebles().Select(p => new InmuebleViewModel(p));
             return inmuebles;
         }
-
+        [AllowAnonymous]
         [HttpGet("/InmueblesConFotoPrincipal")]
         public IEnumerable<InmuebleViewModel> GetInmuebleConFotoPrincipal()
         {
@@ -110,7 +113,7 @@ namespace leco.Controllers
         public ActionResult<String> Put(InmuebleInputModel Input)
         {
             
-            var mensaje = Service.ActualizarInmueble(Input);
+            var mensaje = Service.ActualizarInmueble(MapearInmueble(Input));
             return Ok("Correcto");
         }
     }

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jtUTzNgFshliY5YxEO6QhC9W20GghRvhPLxFrR52YQtwl7heF9DXGovc6qTOagNp1yr2gMjdeJJQWp4FHfI86A==",
+  "dgSpecHash": "e2YRiNC5e2CjuF1URJi9+nSWNkCyzFdRhz+WrDlZrCUs6g9m2zzySD1flVeoImpk6ukObtI/VApvPZz0wLZN2Q==",
   "success": true,
-  "projectFilePath": "C:\\Proyecto2021Movil\\Proyecto_ingenieria_de_software-_programacion_movil\\Pagina_web\\Entity\\Entity.csproj",
+  "projectFilePath": "c:\\Users\\nicoa\\Documents\\Proyecto_ingenieria_de_software-_programacion_movil\\Pagina_web\\Entity\\Entity.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\AlexAC\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+    "C:\\Users\\nicoa\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

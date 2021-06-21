@@ -19,6 +19,21 @@ namespace Datos.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Entity.Autorizacion", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FraseSecreta")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Autorizacion");
+                });
+
             modelBuilder.Entity("Entity.Inmueble", b =>
                 {
                     b.Property<string>("codigo")

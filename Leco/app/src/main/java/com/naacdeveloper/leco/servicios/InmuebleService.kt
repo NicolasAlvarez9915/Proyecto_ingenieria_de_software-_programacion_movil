@@ -1,5 +1,7 @@
 package com.naacdeveloper.leco.servicios
 
+import android.R.attr.password
+import android.R.attr.targetActivity
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
@@ -8,15 +10,18 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.util.Base64
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.naacdeveloper.leco.modelos.FotoInmueble
 import com.naacdeveloper.leco.modelos.Inmueble
 import com.naacdeveloper.leco.modelos.Inmuebles
@@ -26,7 +31,7 @@ import java.io.ByteArrayOutputStream
 class InmuebleService {
 
     companion object{
-        val baseUrl:String = "http://192.168.100.214:8081";
+        val baseUrl:String = "http://192.168.0.65:8081/";
 
         fun parsearIMagenBase64(img: ImageView): String {
             val bitmap = (img.drawable as BitmapDrawable).bitmap
@@ -57,9 +62,10 @@ class InmuebleService {
 
             val solicitud = object :StringRequest(
                 Request.Method.GET,
-                baseUrl + "/Buscar/Inmueble/Direccion/${inmueble.direccion}",
+                baseUrl + "Buscar/Inmueble/Direccion/${inmueble.direccion}",
                 Response.Listener<String> {
                     dialog.dismiss();
+
                     Mensajes.alerta(
                         "Ya existe un inmueble registrado con esta direccion.",
                         context
@@ -67,9 +73,16 @@ class InmuebleService {
                 },
                 Response.ErrorListener {
                     dialog.dismiss();
-                    subirInmueble("/api/Inmueble", context, inmueble);
+                    subirInmueble("api/Inmueble", context, inmueble);
                 }
-            ){}
+            ){
+                override fun getHeaders(): Map<String, String>? {
+                    val headers: HashMap<String, String> = HashMap()
+                    headers["Content-Type"] = "application/json";
+                    headers.put("Authorization", "Bearer " + AutorizacionService.ObtenerToken(context as Activity));
+                    return headers
+                }
+            }
             cola.add(solicitud);
         }
 
@@ -111,12 +124,12 @@ class InmuebleService {
             val requestBody = gson.toJson(inmueble);
 
             val solicitud: StringRequest = object : StringRequest(
-                Method.POST, baseUrl + url,
+                Method.POST, "http://192.168.0.65:8081/api/Inmueble",
                 Response.Listener {
                     Mensajes.MostrarMensaje("¡Inmueble subido exitosamente!", context);
                     dialog.dismiss();
                 }, Response.ErrorListener { response ->
-                    Mensajes.alerta("¡Error al subir el inmueble!", context);
+                    Mensajes.alerta("¡Error al subir el inmueble!${response.message}", context);
                     dialog.dismiss();
                 }){
                 override fun getBodyContentType(): String {
@@ -125,16 +138,22 @@ class InmuebleService {
                 override fun getBody(): ByteArray {
                     return requestBody.toByteArray()
                 }
+                @Throws(AuthFailureError::class)
+                override fun  getHeaders():  Map<String, String> {
+                     val params: HashMap<String, String> = HashMap();
+                    params["Authorization"] = "Bearer " + AutorizacionService.ObtenerToken(context as Activity);
+                    return params;
+                };
             }
             cola.add(solicitud);
         }
 
-        fun obtenerInmuebles(cola: RequestQueue, context: Context, rvInmuebles: RecyclerView){
+        fun obtenerInmuebles(cola: RequestQueue, context: Context, rvInmuebles: RecyclerView, abrirActualizar: AbrirActualizar){
 
 
             val solicitud = object:StringRequest(
                 Request.Method.GET,
-                "http://192.168.100.214:8081/InmueblesConFotoPrincipal",
+                baseUrl+"InmueblesConFotoPrincipal",
                 Response.Listener { response ->
                     try {
                         val gson = Gson();
@@ -144,8 +163,11 @@ class InmuebleService {
                             Inmuebles::class.java
                         )
 
-                        var adaptador = AdaptadorPersonalizado(
-                            context!!,
+                        var adaptador = AdaptadorPersonalizado(object:ClickListener{
+                            override fun onClick(view: View, index: Int) {
+                                abrirActualizar.abrirActualizar(inmueblesRespuesta.inmuebles[index])
+                            }
+                        },
                             inmueblesRespuesta.inmuebles
                         );
 
@@ -211,6 +233,12 @@ class InmuebleService {
                 override fun getBody(): ByteArray {
                     return requestBody.toByteArray();
                 }
+                @Throws(AuthFailureError::class)
+                override fun  getHeaders():  Map<String, String> {
+                    val params: HashMap<String, String> = HashMap();
+                    params["Authorization"] = "Bearer " + AutorizacionService.ObtenerToken(context as Activity);
+                    return params;
+                };
             }
 
             cola.add(putRequest);
